@@ -1,9 +1,9 @@
 const axios = require("axios")
 const { Op } = require("sequelize")
 require('dotenv').config();
+const { API_KEY } = process.env;
 const URL_ALL_DOGS = "https://api.thedogapi.com/v1/breeds/"
 const URL_RAZA = "https://api.thedogapi.com/v1/breeds/search?q="
-const { API_KEY } = process.env;
 const { Dog, Temperament } = require("../db")
 
 const cleanData = (array) => {
@@ -15,6 +15,7 @@ const cleanData = (array) => {
             height: e.height.metric,
             weight: e.weight.metric,
             life_span: e.life_span,
+            created: false,
             temperaments: e.temperament?.split(", ")
         }
     })
@@ -59,7 +60,7 @@ const getDogById = async (id) => {
 
 const getDogByQuery = async (name) => {
     const dogs = await getAllDogs();
-    const result = dogs.filter((e) => e.name.includes(name))
+    const result = dogs.filter((e) => e.name.includes(name.toLowerCase()))
     return result
 }
 
