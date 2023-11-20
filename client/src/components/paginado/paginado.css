@@ -1,0 +1,21 @@
+.paginado {
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.paginado button {
+    margin:  0 20px 0 20px;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+}
+
+.paginado button:hover {
+    background-color: #f1c5418c;
+}
+
+.paginado span {
+    font-weight: bold;
+}
+

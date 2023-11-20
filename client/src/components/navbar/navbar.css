@@ -1,0 +1,65 @@
+.navbar-container {
+    margin: 20px;
+}
+.searchbar-container {
+    background-color: #f1c5418c;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+.searchbar-container input {
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+    background-color: rgb(255, 255, 255);
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    text-align: center;
+    border: none;
+    padding: 5px;
+}
+.searchbar-container input:focus {
+    outline: none;
+}
+.create-button {
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    cursor: pointer;
+    margin-inline-end: 0px;
+    margin-inline-start: 10px;
+    padding: 5px;
+}
+.search-button {
+    border-radius: 0 5px 5px 0;
+    border: none;
+    border-left: none;
+    background-color: rgb(255, 255, 255);
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    cursor: pointer;
+    padding: 5px;
+}
+.searchbar-container button:hover {
+    background-color: #dba605;
+}
+.filters-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f1c5418c;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+}
+.filters-container select {
+    border-radius: 5px;
+    margin: 0 0 0 10px;
+    border: none;
+    cursor: pointer;
+}
+.filters {
+    display: flex;
+}
+.filters select:hover option:hover {
+    background-color: #f1c5418c;
+}
+.orders {
+    display: flex;
+}

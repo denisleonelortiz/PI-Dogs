@@ -1,0 +1,23 @@
+.create {
+    background: linear-gradient(rgba(5, 7, 12, 0.6), rgba(5, 7, 12, 0.6)),
+        url(../../../../utils/form.jpg);
+    height: 100vh;
+
+}
+.create button {
+    border-radius: 5px;
+    padding: 5px;
+}
+.create button:hover {
+    background-color: #dba605;
+    cursor: pointer;
+}
+.button-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.titulo  {
+    color: burlywood;
+    margin: auto;
+}

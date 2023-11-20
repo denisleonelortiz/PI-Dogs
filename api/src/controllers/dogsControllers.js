@@ -16,7 +16,7 @@ const cleanData = (array) => {
             weight: e.weight.metric,
             life_span: e.life_span,
             created: false,
-            temperaments: e.temperament?.split(", ")
+            temperaments: e.temperament
         }
     })
     return dogs
@@ -38,7 +38,8 @@ const getAllDogs = async () => {
     })
     const dogsDb = aux.map((dog) => {
         const arrayTemp = dog.temperaments.map((t) => t.name)
-        return {...dog.get(), temperaments: arrayTemp}
+        const temp = arrayTemp.join(", ")
+        return { ...dog.get(), temperaments: temp }
         //dog.get() porque es un obj sequelize
     })
 
@@ -46,33 +47,44 @@ const getAllDogs = async () => {
 }
 
 const getDogById = async (id) => {
-        const aux = await getAllDogs()
-        const dog = aux.filter((e) => {
-            if(isNaN(id)) {
-                return e.id === id
-            }
-            return e.id === Number(id)
-        })
-        if (!dog.length) return "No existe perro con ese ID"
-        return dog
-    
+    const aux = await getAllDogs()
+    const dog = aux.filter((e) => {
+        if (isNaN(id)) {
+            return e.id === id
+        }
+        return e.id === Number(id)
+    })
+    if (!dog.length) throw new Error ("No existe perro con ese ID")
+    return dog
+
 }
 
 const getDogByQuery = async (name) => {
     const dogs = await getAllDogs();
     const result = dogs.filter((e) => e.name.includes(name.toLowerCase()))
+    if (!result.length) throw new Error ("No existe raza con ese nombre")
     return result
 }
 
-const createDog = async ({ name, image, minHeight, maxHeight, minWeight, maxWeight, min_life_span, max_life_span, temperaments }) => {
+const createDog = async ({ name, image, minHeight, maxHeight, minWeight, maxWeight, life_span, temperaments }) => {
     const newDog = await Dog.create({
         name,
         image,
         height: `${minHeight} - ${maxHeight}`,
         weight: `${minWeight} - ${maxWeight}`,
-        life_span: `${min_life_span} - ${max_life_span} years`,
+        life_span: `${life_span} years`,
     })
-    await newDog.setTemperaments(temperaments)
+
+    temperaments.length
+        ? temperaments.map(async (name) => {
+            const temp = await Temperament.findOne({
+                where: { name: name },
+                attributes: ["id"],
+            })
+            await newDog.setTemperaments(temp.id)
+        })
+        : []
+
     return newDog
 }
 
