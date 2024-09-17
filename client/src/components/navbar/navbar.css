@@ -2,9 +2,10 @@
     margin: 20px;
 }
 .searchbar-container {
-    background-color: #f1c5418c;
-    padding: 10px;
-    border-radius: 10px 10px 0 0;
+    background-color: #dba605;
+    border-radius: 0.5rem;
+    position: relative;
+    padding: 0.5rem;
 }
 .searchbar-container input {
     border-radius: 5px 0 0 5px;
@@ -27,6 +28,7 @@
     margin-inline-end: 0px;
     margin-inline-start: 10px;
     padding: 5px;
+    transition: all 0.5s;
 }
 .search-button {
     border-radius: 0 5px 5px 0;
@@ -36,14 +38,16 @@
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     cursor: pointer;
     padding: 5px;
+    transition: all 0.5s;
 }
 .searchbar-container button:hover {
-    background-color: #dba605;
+    color: #f9f8f3;
+    background-color: rgba(28, 24, 24, 0.996)
 }
 .filters-container {
     display: flex;
     justify-content: space-around;
-    background-color: #f1c5418c;
+    background-color: #0c0b0800;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     padding: 10px;
     border-radius: 0 0 10px 10px;
@@ -57,9 +61,12 @@
 .filters {
     display: flex;
 }
-.filters select:hover option:hover {
-    background-color: #f1c5418c;
-}
 .orders {
     display: flex;
+}
+.create-home-buttons {
+    display: flex;
+    position: absolute;
+    right: 4%;
+    bottom: 15%;
 }

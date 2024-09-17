@@ -17,7 +17,6 @@ function Home() {
     const allDogs = useSelector((state) => state.allDogs);
     const allTemperaments = useSelector((state) => state.allTemperaments);
     const [dogToSearch, setDogToSearch] = useState("");
-    const [aux, setAux] = useState(false);
 
     function handleChange(e) {
         setDogToSearch(e.target.value.toLowerCase());
@@ -34,12 +33,11 @@ function Home() {
 
     function handleOrder(e) {
         dispatch(orderDogs(e.target.value));
-        setAux(!aux);
     }
 
     useEffect(() => {
-        dispatch(getAllDogs());
-        dispatch(getTemperaments());
+        if(!allDogs.length) dispatch(getAllDogs());
+        if(!allTemperaments.length) dispatch(getTemperaments());
     }, [dispatch]);
 
     return (
@@ -52,7 +50,7 @@ function Home() {
                 handleOrder={handleOrder}
                 dogToSearch={dogToSearch}
             />
-            <Paginado allDogs={allDogs} aux={aux} />
+            <Paginado allDogs={allDogs} />
         </div>
     );
 }

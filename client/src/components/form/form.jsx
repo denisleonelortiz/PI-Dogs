@@ -18,8 +18,8 @@ function Form() {
         life_span: "",
         temperaments: [],
     });
-
-    const [error, setError] = useState({});
+    const [error, setError] = useState({error: "Para el button"});
+    const [condicion, setCondicion] = useState(true)
 
     function handleChange(e) {
         setForm({
@@ -32,6 +32,7 @@ function Form() {
                 [e.target.name]: e.target.value,
             })
         );
+        if (Object.values(error).length === 0) setCondicion(false)
     }
 
     async function handleSubmit(e) {
@@ -171,7 +172,7 @@ function Form() {
                     })}
                 </div>
                 <div className="crear-container">
-                    <button type="submit" className="crear-button">
+                    <button type="submit" className="crear-button" disabled={condicion}>
                         Crear
                     </button>
                 </div>

@@ -5,16 +5,16 @@ import "./card.css";
 function Card({ dog }) {
     const { image, name, temperaments, weight, id } = dog;
     return (
-        <div className="card-container">
+        <Link to={`/home/${id}`} className="link">
+            <div className="card-container">
                 <img src={image} alt="" />
-            <div className="text-container">
-                <Link to={`/home/${id}`} className="link">
-                    <h1> {name[0].toUpperCase()+name.slice(1)}</h1>
+                <div className="text-container">
+                    <h1> {name[0].toUpperCase() + name.slice(1)}</h1>
                     <h3> {temperaments}</h3>
-                    <h3>Peso: {weight}</h3>
-                </Link>
+                    <h3>Peso: {weight.join(" - ")}</h3>
+                </div>
             </div>
-        </div>
+        </Link>
     );
 }
 

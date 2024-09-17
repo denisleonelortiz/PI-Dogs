@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 export const GET_DOGS = "GET_DOGS"
 export const GET_DOGS_BY_NAME = "GET_DOGS_BY_NAME"
 export const GET_DOG_BY_ID = "GET_BY_ID"
@@ -7,7 +8,9 @@ export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS"
 export const SET_TEMPERAMENTS = "SET_TEMPERAMENTS"
 export const FILTER_DOGS = "FILTER_DOGS"
 export const ORDER_DOGS = "ORDER_DOGS"
-export const HOME = "HOME"
+export const CHANGE_PAGE = "CHANGE_PAGE"
+export const CLEAN_STATE = "CLEAN_STATE"
+
 
 
 export function getAllDogs() {
@@ -39,13 +42,13 @@ export function getDogsByName(name) {
     }
 }
 
-export function getDogById(id) {
+export function getDogById(dog) {
     return async function (dispatch) {
         try {
-            const { data } = await axios(`http://localhost:3001/dogs/${id}`)
+            // const { data } = await axios(`http://localhost:3001/dogs/${id}`)
             return dispatch({
                 type: GET_DOG_BY_ID,
-                payload: data
+                payload: dog
             })
         } catch (error) {
             console.log(error);
@@ -81,8 +84,15 @@ export function orderDogs(order) {
     }
 }
 
-export function home() {
+export function changePage(numPage) {
     return {
-        type: HOME
+        type: CHANGE_PAGE,
+        payload: numPage
+    }
+}
+
+export function cleanState () {
+    return {
+        type: CLEAN_STATE,
     }
 }

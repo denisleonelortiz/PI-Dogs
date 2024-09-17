@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Form from "../../components/form/form";
 import "./create.css";
 
@@ -9,7 +9,7 @@ function Create() {
     };
     return (
         <div className="create">
-            <h1 className="titulo">Crear Raza</h1>
+            <h1 className="titulo">Nueva Raza</h1>
             <Form />
             <div className="button-div">
                 <button onClick={() => back()}>Home</button>

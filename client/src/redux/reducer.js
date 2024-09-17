@@ -1,7 +1,7 @@
-import { FILTER_DOGS, GET_DOGS, GET_DOGS_BY_NAME, GET_DOG_BY_ID, GET_TEMPERAMENTS, HOME, ORDER_DOGS } from "./action"
+import { CHANGE_PAGE, CLEAN_STATE, FILTER_DOGS, GET_DOGS, GET_DOGS_BY_NAME, GET_DOG_BY_ID, GET_TEMPERAMENTS, ORDER_DOGS } from "./action"
 
 
-let inicialState = { allDogs: [], copyAllDogs: [], allTemperaments: [], copyAllTemperaments: [] }
+let inicialState = { allDogs: [], copyAllDogs: [], allTemperaments: [], copyAllTemperaments: [], page: 1, dogById:[], filter:"" }
 
 const rootReducer = (state = inicialState, action) => {
     switch (action.type) {
@@ -19,7 +19,7 @@ const rootReducer = (state = inicialState, action) => {
         case GET_DOG_BY_ID:
             return {
                 ...state,
-                allDogs: action.payload
+                dogById: action.payload
             }
         case GET_TEMPERAMENTS:
             return {
@@ -38,25 +38,56 @@ const rootReducer = (state = inicialState, action) => {
                         : filtered = state.copyAllDogs.filter((dog) => dog.temperaments?.includes(action.payload))
             return {
                 ...state,
-                allDogs: filtered
+                allDogs: filtered,
+                page: 1
             }
         case ORDER_DOGS:
             let order = []
+            let arrayDogs = [...state.allDogs]
             action.payload === "A-Z"
-                ? order = state.allDogs.sort((a, b) => a.name.localeCompare(b.name))
+                ? order = arrayDogs.sort((a, b) => a.name.localeCompare(b.name))
                 : action.payload === "Z-A"
-                    ? order = state.allDogs.sort((a, b) => b.name.localeCompare(a.name))
-                    : action.payload === "Menor peso"
-                        ? order = state.allDogs.sort((a, b) => a.weight.split(" - ")[0] - b.weight.split(" - ")[0])
-                        : order = state.allDogs.sort((a, b) => b.weight.split(" - ")[0] - a.weight.split(" - ")[0])
+                    ? order = arrayDogs.sort((a, b) => b.name.localeCompare(a.name))
+                    : action.payload === "Mayor peso"
+                        ? order = arrayDogs.sort((a, b) => {
+                            // Coloca NaN al final
+                            if (isNaN(a.weight[0]) && isNaN(b.weight[0])) {
+                                return 0; // Ambos son NaN, considerados iguales
+                            }
+                            if (isNaN(a.weight[0])) {
+                                return 1; // a es NaN, b se considera mayor
+                            }
+                            if (isNaN(b.weight[0])) {
+                                return -1; // b es NaN, a se considera mayor
+                            }
+                            return b.weight[0] - a.weight[0]
+                        })
+                        : order = arrayDogs.sort((a, b) => {
+                            if (isNaN(a.weight[0]) && isNaN(b.weight[0])) {
+                                return 0;
+                            }
+                            if (isNaN(a.weight[0])) {
+                                return 1;
+                            }
+                            if (isNaN(b.weight[0])) {
+                                return -1;
+                            } return a.weight[0] - b.weight[0]
+                        })
             return {
                 ...state,
-                allDogs: order
+                allDogs: order,
+                page: 1,
+                filter: action.payload
             }
-            case HOME:
+        case CHANGE_PAGE:
+            return {
+                ...state,
+                page: action.payload
+            }
+            case CLEAN_STATE:
                 return {
                     ...state,
-                    allDogs:state.copyAllDogs
+                    dogById:[ ]
                 }
         default:
             return state

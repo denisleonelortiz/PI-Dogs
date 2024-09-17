@@ -12,8 +12,8 @@ const cleanData = (array) => {
             id: e.id,
             name: e.name.toLowerCase(),
             image: e.image.url,
-            height: e.height.metric,
-            weight: e.weight.metric,
+            height: e.height.metric.split(" - "),
+            weight: e.weight.metric.split(" - "),
             life_span: e.life_span,
             created: false,
             temperaments: e.temperament
@@ -39,7 +39,9 @@ const getAllDogs = async () => {
     const dogsDb = aux.map((dog) => {
         const arrayTemp = dog.temperaments.map((t) => t.name)
         const temp = arrayTemp.join(", ")
-        return { ...dog.get(), temperaments: temp }
+        const height = dog.height.split(" - ")
+        const weight = dog.weight.split(" - ")
+        return { ...dog.get(), temperaments: temp, height, weight }
         //dog.get() porque es un obj sequelize
     })
 

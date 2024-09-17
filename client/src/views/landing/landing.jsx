@@ -1,7 +1,16 @@
 import { NavLink } from 'react-router-dom';
 import './landing.css';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getAllDogs, getTemperaments } from '../../redux/action';
 
 function Landing() {
+    const dispatch = useDispatch()
+
+    useEffect(()=> {
+        dispatch(getAllDogs())
+        dispatch(getTemperaments())
+    }, [dispatch])
     return (
         <div className="landing">
             <div className='comenzar'>

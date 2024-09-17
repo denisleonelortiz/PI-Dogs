@@ -5,7 +5,7 @@ function
 
 Cards({dogs}) {
     return (
-        <div className="cards-container">
+        <div className="cards-container bounce">
             {dogs?.map(dog => <Card dog = {dog}/>)}
         </div>
     );

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import { useDispatch } from "react-redux";
-import { home } from "../../redux/action";
+import { getAllDogs } from "../../redux/action";
 
 function Navbar({
     handleChange,
@@ -14,7 +14,7 @@ function Navbar({
     const dispatch = useDispatch();
 
     const back = () => {
-        dispatch(home());
+        dispatch(getAllDogs());
     };
     return (
         <div className="navbar-container">
@@ -33,12 +33,14 @@ function Navbar({
                 >
                     Buscar
                 </button>
+                <div className="create-home-buttons">
                 <button className="create-button" onClick={() => back()}>
-                    Home
+                    Inicio
                 </button>
                 <NavLink to={"/create"}>
                     <button className="create-button">Crear</button>
                 </NavLink>
+                </div>
             </div>
             <div className="filters-container">
                 <div className="filters">
@@ -56,9 +58,9 @@ function Navbar({
                         <option disabled selected>
                             Origen
                         </option>
+                        <option>Todos</option>
                         <option>Api</option>
                         <option>Base de datos</option>
-                        <option>Todos</option>
                     </select>
                 </div>
                 <div className="orders">
@@ -72,7 +74,7 @@ function Navbar({
                     </select>
                     <select onChange={handleOrder}>
                         <option disabled selected>
-                            Por peso
+                            Peso
                         </option>
                         <option>Menor peso</option>
                         <option>Mayor peso</option>
