@@ -20,11 +20,12 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const { chargeTemperamentsDb } = require('./src/utils/index.js');
+const port = process.env.PORT || 3001
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
     server.listen(3001, async() => {
         await chargeTemperamentsDb()
-        console.log('%s listening at 3001'); // eslint-disable-line no-console
+        console.log(`server listening at ${port}`); // eslint-disable-line no-console
     });
 });
