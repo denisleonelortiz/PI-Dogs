@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {dogIns} from '../api/apiInstance.js'
 
 
 export const GET_DOGS = "GET_DOGS"
@@ -16,7 +17,7 @@ export const CLEAN_STATE = "CLEAN_STATE"
 export function getAllDogs() {
     return async function (dispatch) {
         try {
-            const { data } = await axios("http://localhost:3001/dogs")
+            const { data } = await dogIns.get("/dogs")
             return dispatch({
                 type: GET_DOGS,
                 payload: data
@@ -30,7 +31,7 @@ export function getAllDogs() {
 export function getDogsByName(name) {
     return async function (dispatch) {
         try {
-            const { data } = await axios(`http://localhost:3001/dogs?name=${name}`)
+            const { data } = await dogIns.get(`/dogs?name=${name}`)
             return dispatch({
                 type: GET_DOGS_BY_NAME,
                 payload: data
@@ -59,7 +60,7 @@ export function getDogById(dog) {
 export function getTemperaments() {
     return async function (dispatch) {
         try {
-            const { data } = await axios(`http://localhost:3001/temperaments`)
+            const { data } = await dogIns.get(`/temperaments`)
             return dispatch({
                 type: GET_TEMPERAMENTS,
                 payload: data
