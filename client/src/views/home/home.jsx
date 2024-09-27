@@ -15,6 +15,7 @@ import Paginado from "../../components/paginado/paginado";
 function Home() {
     const dispatch = useDispatch();
     const allDogs = useSelector((state) => state.allDogs);
+    const switcher = useSelector((state) => state.refresh)
     const allTemperaments = useSelector((state) => state.allTemperaments);
     const [dogToSearch, setDogToSearch] = useState("");
 
@@ -38,7 +39,7 @@ function Home() {
     useEffect(() => {
         if(!allDogs.length) dispatch(getAllDogs());
         if(!allTemperaments.length) dispatch(getTemperaments());
-    }, [dispatch]);
+    }, [dispatch, switcher]);
 
     return (
         <div className="home">

@@ -11,6 +11,7 @@ export const FILTER_DOGS = "FILTER_DOGS"
 export const ORDER_DOGS = "ORDER_DOGS"
 export const CHANGE_PAGE = "CHANGE_PAGE"
 export const CLEAN_STATE = "CLEAN_STATE"
+export const POST_DOG = "POST_DOG"
 
 
 
@@ -95,5 +96,11 @@ export function changePage(numPage) {
 export function cleanState () {
     return {
         type: CLEAN_STATE,
+    }
+}
+
+export function postDog () {
+    return {
+        type: POST_DOG,
     }
 }

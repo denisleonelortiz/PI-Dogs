@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./form.css";
 import validate from "./validate";
-import { getTemperaments } from "../../redux/action";
+import { getTemperaments, postDog } from "../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
+import { dogIns } from "../../api/apiInstance";
 
 function Form() {
     const dispatch = useDispatch();
@@ -42,7 +43,8 @@ function Form() {
             Object.values(form)[0] !== "" &&
             Object.values(error).length === 0
         ) {
-            await axios.post("http://localhost:3001/dogs/", form);
+            const newDog=await dogIns.post("/dogs", form);
+            dispatch(postDog())
             setForm({
                 name: "",
                 image: "",

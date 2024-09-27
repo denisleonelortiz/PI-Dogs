@@ -1,7 +1,7 @@
-import { CHANGE_PAGE, CLEAN_STATE, FILTER_DOGS, GET_DOGS, GET_DOGS_BY_NAME, GET_DOG_BY_ID, GET_TEMPERAMENTS, ORDER_DOGS } from "./action"
+import { CHANGE_PAGE, CLEAN_STATE, FILTER_DOGS, GET_DOGS, GET_DOGS_BY_NAME, GET_DOG_BY_ID, GET_TEMPERAMENTS, ORDER_DOGS, POST_DOG } from "./action"
 
 
-let inicialState = { allDogs: [], copyAllDogs: [], allTemperaments: [], copyAllTemperaments: [], page: 1, dogById:[], filter:"" }
+let inicialState = { allDogs: [], copyAllDogs: [], allTemperaments: [], copyAllTemperaments: [], page: 1, dogById:[], filter:"", refresh:false }
 
 const rootReducer = (state = inicialState, action) => {
     switch (action.type) {
@@ -84,11 +84,16 @@ const rootReducer = (state = inicialState, action) => {
                 ...state,
                 page: action.payload
             }
-            case CLEAN_STATE:
+        case CLEAN_STATE:
                 return {
                     ...state,
                     dogById:[ ]
                 }
+        case POST_DOG:
+            return {
+                ...state,
+                refresh: !state.refresh
+            }
         default:
             return state
     }

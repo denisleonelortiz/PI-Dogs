@@ -17,7 +17,9 @@ function Detail() {
     };
 
     useEffect(() => {
-        const dog = allDogs.filter((dog) => dog.id === Number(id));
+        const dog = allDogs.filter((dog) => dog.id.toString() === id.toString());
+       
+        
         dispatch(getDogById(dog));
         return () => {
             dispatch(cleanState());
